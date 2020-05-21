@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:proyecto_dp/post_detail.dart';
+import 'package:proyecto_dp/globales.dart';
 import 'package:proyecto_dp/posts.dart';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_dp/prueba.dart';
 
 class PostList extends StatefulWidget {
   @override
@@ -30,14 +31,21 @@ class _PostListState extends State<PostList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
-        appBar: AppBar(
-          title: Text(
-            "PostApp",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(90.0), // here the desired height
+          child: AppBar(
+            titleSpacing: 0.0,
+            centerTitle: true,
+            title: new Transform(
+                transform: new Matrix4.translationValues(0.0, 10.0, 0.0),
+                child: Text(
+                  "PostApp",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                )),
+            backgroundColor: Colors.blue,
           ),
-          backgroundColor: Colors.blue,
         ),
+        backgroundColor: Colors.grey[300],
         drawer: Drawer(),
         body: postss == null
             ? Center(
@@ -50,38 +58,41 @@ class _PostListState extends State<PostList> {
                           child: InkWell(
                               child: Hero(
                             tag: p.title,
-                            child: Container(
-                                width: 300,
-                                height: 90,
-                                padding: EdgeInsets.all(2.0),
-                                child: RaisedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                PostDetail()));
-                                    /*Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PostDetail(
-                                                  posts: p,*
-                                                )));*/
-                                  },
-                                  elevation: 2,
-                                  color: Colors.white,
-                                  shape: new RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(7.0)),
-                                  highlightColor: Colors.cyan[100],
-                                  child: Text(
-                                    p.title,
-                                    style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20),
-                                  ),
-                                )),
+                            child: Card(
+                                margin: EdgeInsets.all(2.0),
+                                elevation: 3.0,
+                                shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(7.0)),
+                                //width: 300,
+                                //height: 90,
+                                //padding: EdgeInsets.all(2.0),
+                                child: ListTile(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  JsonApiPhp()));
+                                      id_post = p.id.toString();
+                                      titulo_post = p.title;
+                                    },
+                                    title: Text(
+                                      p.title,
+                                      style: TextStyle(
+                                          color: Colors.grey[800],
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 20),
+                                    ),
+                                    subtitle: Text(p.body)
+                                    //elevation: 2,
+                                    //color: Colors.white,
+                                    //shape: new RoundedRectangleBorder(
+                                    // borderRadius:
+                                    //new BorderRadius.circular(7.0)),
+                                    //highlightColor: Colors.cyan[100],
+                                    //child:
+                                    )),
                           )),
                         ))
                     .toList()));

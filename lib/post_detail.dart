@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:proyecto_dp/comments.dart';
+import 'package:proyecto_dp/globales.dart';
 
 class PostDetail extends StatefulWidget {
   _PostDetailState createState() => _PostDetailState();
@@ -9,7 +10,7 @@ class PostDetail extends StatefulWidget {
 
 class _PostDetailState extends State<PostDetail> {
   String url =
-      "https://raw.githubusercontent.com/leooyer16/proyecto_dp/master/comments.json";
+      "https://jsonplaceholder.typicode.com/posts/"+id_post+"/comments";
   Comments comments;
 
   @override
