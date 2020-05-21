@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:proyecto_dp/comments.dart';
 
@@ -9,7 +8,8 @@ class PostDetail extends StatefulWidget {
 }
 
 class _PostDetailState extends State<PostDetail> {
-  String url = "https://jsonplaceholder.typicode.com/comments";
+  String url =
+      "https://raw.githubusercontent.com/leooyer16/proyecto_dp/master/comments.json";
   Comments comments;
 
   @override
@@ -41,43 +41,33 @@ class _PostDetailState extends State<PostDetail> {
             : ListView(
                 children: comments.comment
                     .map((p) => Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Positioned(
-                            height: MediaQuery.of(context).size.height / 1.5,
-                            width: MediaQuery.of(context).size.width - 20,
-                            left: 10,
-                            top: MediaQuery.of(context).size.height * 0.1,
-                            child: Card(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 80.0,
-                                  ),
-                                  Text(
-                                    p.name,
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    p.email,
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    p.body,
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
+                        padding: const EdgeInsets.all(3.0),
+                        child: Card(
+                          elevation: 3.0,
+                          child: Column(children: <Widget>[
+                            Text(
+                              p.name,
+                              style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 20),
                             ),
-                          ),
-                        ))
+                            Text(
+                              p.email,
+                              style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 20),
+                            ),
+                            Text(
+                              p.body,
+                              style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 20),
+                            )
+                          ]),
+                        )))
                     .toList()));
   }
 }
