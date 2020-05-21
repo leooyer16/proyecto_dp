@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:proyecto_dp/globales.dart';
@@ -12,7 +11,7 @@ class JsonApiPhp extends StatefulWidget {
 class _JsonApiPhpState extends State<JsonApiPhp> {
   bool loading = true;
   final String url =
-      "https://jsonplaceholder.typicode.com/posts/" + id_post + "/comments";
+      "https://jsonplaceholder.typicode.com/posts/" + idPost + "/comments";
   var client = http.Client();
   List<Comment> comment = List<Comment>();
 
@@ -38,7 +37,20 @@ class _JsonApiPhpState extends State<JsonApiPhp> {
 
   @override
   Widget build(BuildContext context) {
-    Widget comments = Container(
+    Widget nombrePost = Padding(
+      padding: EdgeInsets.all(2.0),
+      child: Card(
+          color: Colors.blue[200],
+          elevation: 5.0,
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(8.0)),
+          child: ListTile(
+            title: Text(tituloPost,
+                style: TextStyle(fontWeight: FontWeight.w300, fontSize: 25)),
+          )),
+    );
+
+    Widget comments = Expanded(
         child: loading
             ? Container(
                 child: Center(
@@ -49,14 +61,13 @@ class _JsonApiPhpState extends State<JsonApiPhp> {
                 itemCount: comment.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    margin: EdgeInsets.all(4.0),
+                    margin: EdgeInsets.all(5.0),
                     elevation: 3.0,
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(8.0)),
                     child: ListTile(
                       title: Text(comment[index].body),
                       subtitle: Text(comment[index].name),
-                      //leading: Text(comment[index].body),
                       trailing: Icon(Icons.favorite),
                     ),
                   );
@@ -64,17 +75,14 @@ class _JsonApiPhpState extends State<JsonApiPhp> {
               ));
 
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90.0), // here the desired height
-          child: AppBar(
-            title: Text(titulo_post, style: TextStyle(
-                                          fontWeight: FontWeight.w200,
-                                          fontSize: 20)),
-            backgroundColor: Colors.blue,
-          ),
+        appBar: AppBar(
+          title: Text("Comments"),
+          backgroundColor: Colors.blue,
         ),
-        backgroundColor: Colors.grey[100],
-        body: comments);
+        backgroundColor: Colors.grey[200],
+        body: Column(
+          children: <Widget>[nombrePost, comments],
+        ));
   }
 }
 

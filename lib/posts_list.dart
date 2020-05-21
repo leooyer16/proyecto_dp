@@ -31,19 +31,14 @@ class _PostListState extends State<PostList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90.0), // here the desired height
-          child: AppBar(
-            titleSpacing: 0.0,
-            centerTitle: true,
-            title: new Transform(
-                transform: new Matrix4.translationValues(0.0, 10.0, 0.0),
-                child: Text(
-                  "PostApp",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                )),
-            backgroundColor: Colors.blue,
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          centerTitle: true,
+          title: Text(
+            "PostApp",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           ),
+          backgroundColor: Colors.blue,
         ),
         backgroundColor: Colors.grey[300],
         drawer: Drawer(),
@@ -64,9 +59,6 @@ class _PostListState extends State<PostList> {
                                 shape: new RoundedRectangleBorder(
                                     borderRadius:
                                         new BorderRadius.circular(7.0)),
-                                //width: 300,
-                                //height: 90,
-                                //padding: EdgeInsets.all(2.0),
                                 child: ListTile(
                                     onTap: () {
                                       Navigator.push(
@@ -74,58 +66,26 @@ class _PostListState extends State<PostList> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   JsonApiPhp()));
-                                      id_post = p.id.toString();
-                                      titulo_post = p.title;
+                                      idPost = p.id.toString();
+                                      tituloPost = p.title;
                                     },
                                     title: Text(
                                       p.title,
                                       style: TextStyle(
-                                          color: Colors.grey[800],
+                                          color: Colors.black,
                                           fontWeight: FontWeight.normal,
                                           fontSize: 20),
                                     ),
-                                    subtitle: Text(p.body)
-                                    //elevation: 2,
-                                    //color: Colors.white,
-                                    //shape: new RoundedRectangleBorder(
-                                    // borderRadius:
-                                    //new BorderRadius.circular(7.0)),
-                                    //highlightColor: Colors.cyan[100],
-                                    //child:
-                                    )),
+                                    subtitle: Text(p.body,
+                                        style: TextStyle(
+                                            color: Colors.grey[800],
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16)),
+                                    trailing: Column(children: <Widget>[
+                                      Icon(Icons.comment),
+                                    ]))),
                           )),
                         ))
                     .toList()));
   }
 }
-
-/*GridView.count(
-              crossAxisCount: 1,
-              children: postss.posts
-                  .map((p) => Padding(
-                    /*
-                        padding: const EdgeInsets.all(2.0),
-                        child: InkWell(
-                          onTap: () {
-                            //Navigator.push(context, MaterialPageRoute(builder: (context) => PostsDetail(pokemon: p,)));
-                          },
-                          //child: Hero(
-                            //tag: p.userId,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Text(
-                                      p.title, 
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
-                                    ))
-                              ],
-                            ),
-                          //),
-                        ),
-                     */ ))
-                  .toList(),
-            ),*/
